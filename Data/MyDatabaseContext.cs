@@ -16,16 +16,16 @@ namespace DotNetCoreSqlDb.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Convert CreatedDate (DateTime) to string for storage in TEXT column
+            // Convert CreatedDate to string for storage, and back to DateTime on read
             var dateTimeConverter = new ValueConverter<DateTime, string>(
-                v => v.ToString("yyyy-MM-dd HH:mm:ss"),  // store format
-                v => DateTime.Parse(v)                   // read back as DateTime
+                v => v.ToString("yyyy-MM-dd HH:mm:ss"),  // write as string
+                v => DateTime.Parse(v)                   // read as DateTime
             );
 
             modelBuilder.Entity<Todo>()
                 .Property(t => t.CreatedDate)
                 .HasConversion(dateTimeConverter)
-                .HasColumnType("TEXT"); // ensure it maps to TEXT in SQL
+                .HasColumnType("TEXT"); // explicitly TEXT in SQL
         }
     }
 }
