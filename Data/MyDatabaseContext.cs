@@ -1,6 +1,6 @@
-Update this store the DateTime as a string that matches the database column type (TEXT).
+// Update this store the DateTime as a string that matches the database column type (TEXT).
 
-﻿#nullable disable
+﻿// #nullable disable
 using Microsoft.EntityFrameworkCore;
 
 namespace DotNetCoreSqlDb.Models
